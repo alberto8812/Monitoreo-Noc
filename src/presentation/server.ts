@@ -1,7 +1,8 @@
 //
 
-import { CronService } from "./cron/cron.service";
 import { CheckService } from "../domain/use-cases/checks/cehcks-service";
+import { CronService } from "./cron/cron.service";
+
 
 
 export class Server {
