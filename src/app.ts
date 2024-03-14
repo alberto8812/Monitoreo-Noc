@@ -1,12 +1,11 @@
+import { envs } from "./config/plugins/envs.plugin";
+import { Server } from "./presentation/server";
+import "dotenv/config";
 
-import { Server } from "./presentation/server"
-
-
- const main=()=>{
-
-    Server.start();
-
+const main = () => {
+  Server.start();
+  console.log(envs.PORT);
 };
-(async()=>{
-    await main();
+(async () => {
+  await main();
 })();
