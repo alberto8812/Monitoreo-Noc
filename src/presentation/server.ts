@@ -18,18 +18,20 @@ export class Server {
         //directamente  y no crear un nueva instancia 
 
       //  job.start();
-      CronService.createJob(
-        '*/5 * * * * *',
-        ()=>{
-            const url='https://google.com';
-            new CheckService(
-              fileSystemLogRepository,
-              ()=>console.log(`${url} is ok`),
-              (error)=>console.log(error)
-            ).execute(url);
+      //MANDAR EMAIL
 
-        }
-      );
+      // CronService.createJob(
+      //   '*/5 * * * * *',
+      //   ()=>{
+      //       const url='https://google.com';
+      //       new CheckService(
+      //         fileSystemLogRepository,
+      //         ()=>console.log(`${url} is ok`),
+      //         (error)=>console.log(error)
+      //       ).execute(url);
+
+      //   }
+      // );
 
     }
 }

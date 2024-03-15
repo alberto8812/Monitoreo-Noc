@@ -1,7 +1,6 @@
-
 ![alt text](image.png)
 
-# Proycto NOC
+# Proyecto NOC
 
 El objetivo es crear una serie de tareas usando arquitectura limpia con TypesScript
 
@@ -17,3 +16,5 @@ MAILER_SECRET_KET=
 PROD=false
 
 ```
+3. Ejecutar el comando ```npm install ``
+4. Ejecutar ```npm run dev``
