@@ -1,21 +1,27 @@
 //
 
-import { CheckService } from "../domain/use-cases/checks/cehcks-service";
+
 import { LogRepositoryImpl } from "../infrastructure/log.respository.impl";
-import { CronService } from "./cron/cron.service";
 import { FileSystemDatasource } from '../infrastructure/datasources/file-system.datasource';
+import { EmailService } from "./email/email.service";
+import { SendEmailLogs } from "../domain/use-cases/email/send-logs";
 
 const fileSystemLogRepository=new LogRepositoryImpl(
   new FileSystemDatasource()
 );
 
+const emialService= new EmailService();
 export class Server {
-
 
 
 
     public static start(){// le colocamos static para usar el metodo 
         //directamente  y no crear un nueva instancia 
+      // console.log('Server started...')
+      // new SendEmailLogs(emialService,fileSystemLogRepository).execute(  ['cvelascosaavedra@gmail.com'])
+      // emialService.sendEmailWithFileSystemLogs(
+      //   ['cvelascosaavedra@gmail.com']
+      // )
 
       //  job.start();
       //MANDAR EMAIL
