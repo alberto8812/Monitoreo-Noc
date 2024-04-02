@@ -28,7 +28,8 @@ export class LogEntity {
      };
 
      //"{"level":"high","message":"hola mundo","createAt":"12457888888"}"
-     static fromJson=(json:string):LogEntity=>{
+     static fromJson=(json:string='{}'):LogEntity=>{
+        json= (json==='{}')?'{}':json;
         const {message,level,creatAt,origin}=JSON.parse(json);
         // if(!message) throw new Error('message is requiered');
         // if(!level) throw new Error('level is requiered');
@@ -42,6 +43,15 @@ export class LogEntity {
          });
         log.creatAt=new Date(creatAt);
 
+        return log;
+     }
+
+
+     static fromObject =(object:{[key:string]:any}):LogEntity=>{
+        const {message,level,origin,creatAt}=object;
+        const log= new LogEntity({
+            message,level,origin,creatAt
+        });
         return log;
      }
 
