@@ -7,7 +7,8 @@ import {
 
 export class FileSystemDatasource implements LogDataSource {
   private readonly logPath = "logs/";
-  private readonly allLogSPath = "logs/logs-low.log";
+  private readonly allLogSPath = "logs/logs-all.log";
+  private readonly lowLogSPath = "logs/logs-low.log";
   private readonly mediumLogSPath = "logs/logs-medium.log";
   private readonly highLogSPath = "logs/logs-high.log";
 
@@ -19,7 +20,7 @@ export class FileSystemDatasource implements LogDataSource {
     if (!fs.existsSync(this.logPath)) {
       fs.mkdirSync(this.logPath);
     }
-    [this.allLogSPath, this.mediumLogSPath, this.highLogSPath].forEach(
+    [this.allLogSPath, this.mediumLogSPath, this.highLogSPath,this.lowLogSPath].forEach(
       (path) => {
         if (fs.existsSync(path)) return;
         fs.writeFileSync(path, "");
@@ -32,7 +33,9 @@ export class FileSystemDatasource implements LogDataSource {
     const logAsJson=`${JSON.stringify(log)} \n`;
     
    fs.appendFileSync(this.allLogSPath,logAsJson);
-   if(log.level===LogSeveritylevel.low) return;
+   if(log.level===LogSeveritylevel.low) {
+    fs.appendFileSync(this.lowLogSPath,logAsJson);
+   };
    if(log.level===LogSeveritylevel.medium) {
     fs.appendFileSync(this.mediumLogSPath,logAsJson);
    }else {
