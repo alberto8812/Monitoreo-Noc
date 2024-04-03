@@ -7,14 +7,6 @@ El objetivo es crear una serie de tareas usando arquitectura limpia con TypesScr
 # dev
 1. Clonar el archivo .env.tamplate a .env
 2. Configurar lass varaibles de entorno
-```
-PORT=3001
-
-MAILER_EMAIL=
-MAILER_SECRET_KET=
-
-PROD=false
-
-```
-3. Ejecutar el comando ```npm install ``
-4. Ejecutar ```npm run dev``
+3.Ejecutar el comando ```npm install```
+4.levantar las bases de datos con el comando ``` docker compose up -d```
+5. Ejecutar ```npm run dev``

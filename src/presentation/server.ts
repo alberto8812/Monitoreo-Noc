@@ -4,15 +4,30 @@
 import { LogRepositoryImpl } from "../infrastructure/log.respository.impl";
 import { FileSystemDatasource } from '../infrastructure/datasources/file-system.datasource';
 import { EmailService } from "./email/email.service";
-import { SendEmailLogs } from "../domain/use-cases/email/send-logs";
 import { CronService } from "./cron/cron.service";
-import { CheckService } from "../domain/use-cases/checks/cehcks-service";
 import { MongoLogDatasource } from "../infrastructure/datasources/mongo-log.datasource";
+import { PostgresDataSource } from "../infrastructure/datasources/postgres-log.datasource";
+import { CheckServiceMultiple } from "../domain/use-cases/checks/cehcks-service-multiple";
 
-const LogRepository=new LogRepositoryImpl(
-  //new FileSystemDatasource(),
-  new MongoLogDatasource(),
+const fsLogRepository=new LogRepositoryImpl(
+  new FileSystemDatasource(),
+  //new MongoLogDatasource(),
+//  new PostgresDataSource()
+
 );
+const mongoLogRepository=new LogRepositoryImpl(
+//  new FileSystemDatasource(),
+  new MongoLogDatasource(),
+//  new PostgresDataSource()
+
+);
+const PostgresLogRepository=new LogRepositoryImpl(
+//  new FileSystemDatasource(),
+//  new MongoLogDatasource(),
+  new PostgresDataSource()
+
+);
+
 
 const emialService= new EmailService();
 export class Server {
@@ -30,18 +45,18 @@ export class Server {
       //  job.start();
       //MANDAR EMAIL
 
-      // CronService.createJob(
-      //   '*/5 * * * * *',
-      //   ()=>{
-      //       const url='https://google.com';
-      //       new CheckService(
-      //         LogRepository,
-      //         ()=>console.log(`${url} is ok`),
-      //         (error)=>console.log(error)
-      //       ).execute(url);
+      CronService.createJob(
+        '*/5 * * * * *',
+        ()=>{
+            const url='https://google.com';
+            new CheckServiceMultiple(
+              [mongoLogRepository,PostgresLogRepository,fsLogRepository],
+              ()=>console.log(`${url} is ok`),
+              (error)=>console.log(error)
+            ).execute(url);
 
-      //   }
-      // );
+        }
+      );
 
     }
 }
