@@ -45,18 +45,18 @@ export class Server {
       //  job.start();
       //MANDAR EMAIL
 
-      CronService.createJob(
-        '*/5 * * * * *',
-        ()=>{
-            const url='https://google.com';
-            new CheckServiceMultiple(
-              [mongoLogRepository,PostgresLogRepository,fsLogRepository],
-              ()=>console.log(`${url} is ok`),
-              (error)=>console.log(error)
-            ).execute(url);
+      // CronService.createJob(
+      //   '*/5 * * * * *',
+      //   ()=>{
+      //       const url='https://google.com';
+      //       new CheckServiceMultiple(
+      //         [mongoLogRepository,PostgresLogRepository,fsLogRepository],
+      //         ()=>console.log(`${url} is ok`),
+      //         (error)=>console.log(error)
+      //       ).execute(url);
 
-        }
-      );
+      //   }
+      // );
 
     }
 }
