@@ -38,7 +38,7 @@ export class LogEntity {
         const log=new LogEntity({
          message,
          level,
-         creatAt,
+         creatAt:new Date(creatAt),
          origin
          });
         log.creatAt=new Date(creatAt);
